@@ -1,0 +1,335 @@
+[
+    {
+        "id": "5c667ab4bb98c1f1",
+        "type": "tab",
+        "label": "General Housewide Flows",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "3f6a0bd92a71ead9",
+        "type": "ha-zone",
+        "z": "5c667ab4bb98c1f1",
+        "name": "Craig or Sharon Arrive Home",
+        "server": "ca4f37cd.f647f8",
+        "version": 0,
+        "exposeToHomeAssistant": false,
+        "haConfig": [
+            {
+                "property": "name",
+                "value": ""
+            },
+            {
+                "property": "icon",
+                "value": ""
+            }
+        ],
+        "entities": [
+            "person.sharon_iedema",
+            "person.craig_iedema"
+        ],
+        "event": "enter",
+        "zones": [
+            "zone.home"
+        ],
+        "x": 150,
+        "y": 80,
+        "wires": [
+            [
+                "593e38f898efe6b1"
+            ]
+        ]
+    },
+    {
+        "id": "593e38f898efe6b1",
+        "type": "api-current-state",
+        "z": "5c667ab4bb98c1f1",
+        "name": "Is it Dark",
+        "server": "ca4f37cd.f647f8",
+        "version": 3,
+        "outputs": 2,
+        "halt_if": "below_horizon",
+        "halt_if_type": "str",
+        "halt_if_compare": "is",
+        "entity_id": "sun.sun",
+        "state_type": "str",
+        "blockInputOverrides": false,
+        "outputProperties": [
+            {
+                "property": "payload",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "entityState"
+            },
+            {
+                "property": "data",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "entity"
+            }
+        ],
+        "for": "0",
+        "forType": "num",
+        "forUnits": "minutes",
+        "override_topic": false,
+        "state_location": "payload",
+        "override_payload": "msg",
+        "entity_location": "data",
+        "override_data": "msg",
+        "x": 390,
+        "y": 80,
+        "wires": [
+            [
+                "fbf65f83d633c1e7"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "fbf65f83d633c1e7",
+        "type": "api-call-service",
+        "z": "5c667ab4bb98c1f1",
+        "name": "Turn on Lights",
+        "server": "ca4f37cd.f647f8",
+        "version": 5,
+        "debugenabled": false,
+        "domain": "light",
+        "service": "turn_on",
+        "areaId": [],
+        "deviceId": [],
+        "entityId": [
+            "light.back_door_light",
+            "light.kitchen_light"
+        ],
+        "data": "",
+        "dataType": "jsonata",
+        "mergeContext": "",
+        "mustacheAltTags": false,
+        "outputProperties": [],
+        "queue": "none",
+        "x": 660,
+        "y": 80,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "fef1d284dc2c7183",
+        "type": "comment",
+        "z": "5c667ab4bb98c1f1",
+        "name": "Leave/Arrive Home",
+        "info": "",
+        "x": 120,
+        "y": 40,
+        "wires": []
+    },
+    {
+        "id": "c3a90dae341b7648",
+        "type": "api-call-service",
+        "z": "5c667ab4bb98c1f1",
+        "name": "Turn off Lights",
+        "server": "ca4f37cd.f647f8",
+        "version": 5,
+        "debugenabled": false,
+        "domain": "light",
+        "service": "turn_off",
+        "areaId": [],
+        "deviceId": [],
+        "entityId": [
+            "light.all_lights"
+        ],
+        "data": "",
+        "dataType": "jsonata",
+        "mergeContext": "",
+        "mustacheAltTags": false,
+        "outputProperties": [],
+        "queue": "none",
+        "x": 270,
+        "y": 260,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "dd2054cc3ad5b886",
+        "type": "api-call-service",
+        "z": "5c667ab4bb98c1f1",
+        "name": "Turn on Toilet light",
+        "server": "ca4f37cd.f647f8",
+        "version": 5,
+        "debugenabled": false,
+        "domain": "light",
+        "service": "turn_on",
+        "areaId": [],
+        "deviceId": [],
+        "entityId": [
+            "light.lifx_d0_73_d5_66_88_e1"
+        ],
+        "data": "{\"brightness_pct\":2}",
+        "dataType": "jsonata",
+        "mergeContext": "",
+        "mustacheAltTags": false,
+        "outputProperties": [],
+        "queue": "none",
+        "x": 280,
+        "y": 310,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "978e67b2eaa46ef0",
+        "type": "ha-time",
+        "z": "5c667ab4bb98c1f1",
+        "name": "Dawn",
+        "server": "ca4f37cd.f647f8",
+        "version": 2,
+        "exposeToHomeAssistant": false,
+        "haConfig": [
+            {
+                "property": "name",
+                "value": ""
+            },
+            {
+                "property": "icon",
+                "value": ""
+            }
+        ],
+        "entityId": "sun.sun",
+        "property": "attributes.next_dawn",
+        "offset": "30",
+        "offsetType": "num",
+        "offsetUnits": "minutes",
+        "randomOffset": false,
+        "repeatDaily": false,
+        "outputProperties": [
+            {
+                "property": "payload",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "entityState"
+            },
+            {
+                "property": "data",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "entity"
+            },
+            {
+                "property": "topic",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "triggerId"
+            }
+        ],
+        "sunday": true,
+        "monday": true,
+        "tuesday": true,
+        "wednesday": true,
+        "thursday": true,
+        "friday": true,
+        "saturday": true,
+        "debugenabled": false,
+        "x": 80,
+        "y": 260,
+        "wires": [
+            [
+                "c3a90dae341b7648"
+            ]
+        ]
+    },
+    {
+        "id": "0759e64caa80befd",
+        "type": "ha-time",
+        "z": "5c667ab4bb98c1f1",
+        "name": "Dusk",
+        "server": "ca4f37cd.f647f8",
+        "version": 2,
+        "exposeToHomeAssistant": false,
+        "haConfig": [
+            {
+                "property": "name",
+                "value": ""
+            },
+            {
+                "property": "icon",
+                "value": ""
+            }
+        ],
+        "entityId": "sun.sun",
+        "property": "attributes.next_dusk",
+        "offset": "-15",
+        "offsetType": "num",
+        "offsetUnits": "minutes",
+        "randomOffset": false,
+        "repeatDaily": false,
+        "outputProperties": [
+            {
+                "property": "payload",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "entityState"
+            },
+            {
+                "property": "data",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "entity"
+            },
+            {
+                "property": "topic",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "triggerId"
+            }
+        ],
+        "sunday": true,
+        "monday": true,
+        "tuesday": true,
+        "wednesday": true,
+        "thursday": true,
+        "friday": true,
+        "saturday": true,
+        "debugenabled": false,
+        "x": 80,
+        "y": 310,
+        "wires": [
+            [
+                "dd2054cc3ad5b886"
+            ]
+        ]
+    },
+    {
+        "id": "5e3a5c36d021777d",
+        "type": "comment",
+        "z": "5c667ab4bb98c1f1",
+        "name": "Time of Day",
+        "info": "",
+        "x": 100,
+        "y": 220,
+        "wires": []
+    },
+    {
+        "id": "ca4f37cd.f647f8",
+        "type": "server",
+        "name": "Home Assistant",
+        "version": 4,
+        "addon": true,
+        "rejectUnauthorizedCerts": true,
+        "ha_boolean": "y|yes|true|on|home|open",
+        "connectionDelay": true,
+        "cacheJson": true,
+        "heartbeat": false,
+        "heartbeatInterval": 30,
+        "areaSelector": "friendlyName",
+        "deviceSelector": "friendlyName",
+        "entitySelector": "friendlyName",
+        "statusSeparator": "at: ",
+        "statusYear": "hidden",
+        "statusMonth": "short",
+        "statusDay": "numeric",
+        "statusHourCycle": "h23",
+        "statusTimeFormat": "h:m"
+    }
+]
